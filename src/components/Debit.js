@@ -21,7 +21,7 @@ class Debit extends React.Component {
     const value = event.target.value;
     newDebit[name] = value;
     let curDate = new Date();
-    curDate = curDate.toISOString().substring(0, 10);
+    curDate = curDate.toISOString();
     console.log(curDate);
     newDebit.date = curDate;
     this.setState({

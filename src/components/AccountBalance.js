@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 
 class AccountBalance extends React.Component {
   render() {
@@ -7,3 +8,7 @@ class AccountBalance extends React.Component {
 }
 
 export default AccountBalance;
+
+AccountBalance.propTypes = {
+  accountBalance: PropTypes.number,
+};
