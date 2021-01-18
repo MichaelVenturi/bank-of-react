@@ -15,6 +15,8 @@ class App extends React.Component {
         userName: "bob_loblaw",
         memberSince: "08/23/99",
       },
+      debitHistory: [],
+      debitBalance: 0,
     };
   }
   mockLogIn = (logInInfo) => {
@@ -22,6 +24,14 @@ class App extends React.Component {
     newUser.userName = logInInfo.userName;
     this.setState({ currentUser: newUser });
   };
+  addToDebitHistory = (debit) => {
+    this.state.debitHistory.push(debit);
+    this.setState({
+      debitBalance: this.state.debitBalance + debit.amount,
+      accountBalance: this.state.accountBalance - debit.amount,
+    });
+  };
+
   render() {
     const HomeComponent = () => (
       <Home accountBalance={this.state.accountBalance} />
@@ -40,7 +50,11 @@ class App extends React.Component {
       />
     );
     const DebitComponent = () => (
-      <Debit accountBalance={this.state.accountBalance} />
+      <Debit
+        accountBalance={this.state.accountBalance}
+        debitHistory={this.state.debitHistory}
+        addToDebitHistory={this.addToDebitHistory}
+      />
     );
 
     return (

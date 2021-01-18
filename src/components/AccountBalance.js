@@ -2,7 +2,7 @@ import React from "react";
 
 class AccountBalance extends React.Component {
   render() {
-    return <div>Balance: {this.props.accountBalance}</div>;
+    return <div>Balance: {this.props.accountBalance.toFixed(2)}</div>;
   }
 }
 

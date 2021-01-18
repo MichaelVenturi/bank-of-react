@@ -1,17 +1,18 @@
 import React from "react";
 import AccountBalance from "./AccountBalance";
+import { Link } from "react-router-dom";
 
 class Debit extends React.Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      history: [],
       debit: {
         description: "",
         amount: 0,
         date: "",
       },
+      // redirect: false,
     };
   }
   handleChange = (event) => {
@@ -29,27 +30,21 @@ class Debit extends React.Component {
   };
   handleSubmit = (event) => {
     event.preventDefault();
-    // let curDate = new Date();
-
-    // curDate = curDate.toISOString().substring(0, 10);
-
-    // const newDebit = { ...this.state.debit };
-    // newDebit.date = curDate;
-    // console.log(newDebit.date);
+    this.props.addToDebitHistory(this.state.debit);
     // this.setState({
-    //   debit: {
-    //     date: curDate,
-    //   },
+    //   redirect: true,
     // });
-    // console.log(this.state.debit.date);
     this.forceUpdate();
-    this.state.history.push(this.state.debit);
   };
 
   render() {
+    // if (this.state.redirect) {
+    //   return <Redirect to="/" />;
+    // }
     return (
       <div>
         <h1>Debits</h1>
+        <Link to="/">Home</Link>
         <AccountBalance accountBalance={this.props.accountBalance} />
 
         <div>
@@ -78,8 +73,9 @@ class Debit extends React.Component {
           </form>
         </div>
         <div>
+          <h3>Debit History</h3>
           <ul>
-            {this.state.history.map((debit) => (
+            {this.props.debitHistory.map((debit) => (
               <li key={debit.id}>
                 Desciption: {debit.description}, Amount: {debit.amount}, Date:{" "}
                 {debit.date}
