@@ -4,6 +4,7 @@ import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import Home from "./components/Home";
 import UserProfile from "./components/UserProfile";
 import LogIn from "./components/Login";
+import Debit from "./components/Debit";
 
 class App extends React.Component {
   constructor() {
@@ -38,6 +39,9 @@ class App extends React.Component {
         {...this.props}
       />
     );
+    const DebitComponent = () => (
+      <Debit accountBalance={this.state.accountBalance} />
+    );
 
     return (
       <Router>
@@ -45,6 +49,7 @@ class App extends React.Component {
           <Route exact path="/" render={HomeComponent} />
           <Route exact path="/userProfile" render={UserProfileComponent} />
           <Route exact path="/login" render={LogInComponent} />
+          <Route exact path="/debit" render={DebitComponent} />
         </div>
       </Router>
     );
